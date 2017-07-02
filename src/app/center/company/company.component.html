@@ -1,0 +1,410 @@
+<div class="container" [@flyIn]>
+  <div class="resume">
+    <app-center></app-center>
+
+    <div class="col-md-9">
+
+      <!--company开始-->
+      <div class="row" >
+        <div class="userInfo">
+          <div *ngIf="reviseInfo">
+
+            <div *ngIf="companyInfo">
+              <img src="../assets/imgs/headerImg.jpg">
+              <div class="userInfoContent">
+                <h3>{{ companyInfo.companyName }}</h3>
+                <span>{{ companyInfo.nature }} |  {{ companyInfo.peopleCount }} | {{ companyInfo.industry }}</span>
+                <div class="email"><div class="icon"></div>{{ companyInfo.email }}</div>
+                <div class="tel"><div class="icon"></div>{{ companyInfo.tel }}</div>
+              </div>
+              <div class="hiddenInfo" *ngIf="hiddenInfo">
+                <div class="container">
+                  <div class=" col-md-4">
+                    <div class="groupInfo">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<span>{{ companyInfo.address }}</span></div>
+                    <div class="groupInfo">联&nbsp;&nbsp;系&nbsp;&nbsp;人：<span>{{ companyInfo.contacts }}</span></div>
+                  </div>
+                  <div class=" col-md-4">
+                    <div class="groupInfo">成立时间：<span>{{ companyInfo.createTime }}</span></div>
+                    <div class="groupInfo">公司主页：<span>{{ companyInfo.homepage }}</span></div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="groupInfo">公司福利：<span>{{ companyInfo.welfare }}</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="more" (click)="more()">{{moreInfo}}</div>
+            </div>
+
+            <div *ngIf="!companyInfo">
+              <h1>请尽快完善公司信息，才能发布职位！</h1>
+            </div>
+            <div class="infoRevise icon" (click)="revise()"></div>
+
+          </div>
+          <div *ngIf="companyInfo">
+            <div *ngIf="!reviseInfo">
+              <div class="row">
+                <form class="form-horizontal" #companyForm="ngForm" (ngSubmit)="companySubmit(companyForm.form.value)">
+                  <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司<i>*</i></label>
+                        <div class="col-md-6 col-sm-6 col-xs-7">
+                          <input type="text" class="form-control" required [(ngModel)]="companyInfo.companyName" name="companyName" #companyName="ngModel">
+                          <div *ngIf="companyName.errors && (companyName.dirty || companyName.touched)"
+                               class="alert alert-warning">
+                            <div [hidden]="!companyName.errors.required">公司名是必需的</div>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">成立时间<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="date" class="form-control" required [(ngModel)]="companyInfo.createTime" name="createTime" #createTime="ngModel">
+                        <div *ngIf="createTime.errors && (createTime.dirty || createTime.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!createTime.errors.required">成立日期是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司地址<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="companyInfo.address" name="address" #address="ngModel">
+                        <div *ngIf="address.errors && (address.dirty || address.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!address.errors.required">地址是必填的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">公司规模<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="peopleCount" [(ngModel)]="companyInfo.peopleCount" #pelpleCount="ngModel">
+                          <option value="少于50人">少于50人</option>
+                          <option value="50到150人">50到150人</option>
+                          <option value="150-500人">150-500人</option>
+                          <option value="500-1000人">500-1000人</option>
+                          <option value="1000-5000人">1000-5000人</option>
+                          <option value="5000-10000人">5000-10000人</option>
+                          <option value="10000人以上">10000人以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">行业<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="companyInfo.industry" name="industry" #industry="ngModel">
+                        <div *ngIf="industry.errors && (industry.dirty || industry.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!industry.errors.required">行业是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">公司性质<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="nature" [(ngModel)]="companyInfo.nature"  #nature="ngModel">
+                          <option value="外资（欧美）">外资（欧美）</option>
+                          <option value="外资（非欧美）">外资（非欧美）</option>
+                          <option value="合资">合资</option>
+                          <option value="国企">国企</option>
+                          <option value="民营企业">民营企业</option>
+                          <option value="上市公司">上市公司</option>
+                          <option value="创业公司">创业公司</option>
+                          <option value="政府机关">政府机关</option>
+                          <option value="事业单位">事业单位</option>
+                          <option value="非盈利机构">非盈利机构</option>
+                        </select>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                  <div class="hiddenInfo" *ngIf="hiddenInfo">
+                    <div class="row moreRevise2">
+
+                      <div class="col-md-6">
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">联系人</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="contacts" [(ngModel)]="companyInfo.contacts" #contacts="ngModel">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司主页</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="homepage" [(ngModel)]="companyInfo.homepage" #homepage="ngModel">
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-6">
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">联系电话</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" pattern="[0-9]{11}" [(ngModel)]="companyInfo.tel" name="tel" #tel="ngModel">
+                            <div *ngIf="tel.errors && (tel.dirty || tel.touched)"
+                                 class="alert alert-warning">
+                              <div [hidden]="!tel.errors.pattern">请输入正确的手机号</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司邮箱<i>*</i></label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" pattern="\w+@\w+[.]\w+" [(ngModel)]="companyInfo.email" name="email" #email="ngModel">
+                            <div *ngIf="email.errors && (email.dirty || email.touched)"
+                                 class="alert alert-warning">
+                              <div [hidden]="!email.errors.pattern">请输入正确的邮箱</div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="col-md-3 col-sm-3 col-xs-4 control-label">公司福利</label>
+                          <div class="col-md-9 col-sm-9 col-xs-8">
+                            <input type="text" class="form-control" [(ngModel)]="companyInfo.welfare" name="welfare" #welfare="ngModel">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <label class="col-md-10 col-sm-3 col-xs-4 control-label area">企业介绍</label>
+                      </div>
+                      <div class="col-md-12 col-sm-12 textarea ">
+                        <textarea name="introduce" rows="15" [(ngModel)]="companyInfo.introduce" #introduce="ngModel" ></textarea>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-info" [disabled]="!companyForm.form.valid" />
+                    <input type="reset" class="btn btn-warning" />
+                  </div>
+
+                </form>
+              </div>
+              <div class="infoRevise icon" (click)="revise()"></div>
+              <div class="more moreRevise" (click)="more()">{{moreInfo}}</div>
+            </div>
+          </div>
+
+          <div *ngIf="!companyInfo">
+            <div *ngIf="!reviseInfo">
+              <div class="row">
+                <form class="form-horizontal" #companyForm="ngForm" (ngSubmit)="companySubmit(companyForm.form.value)">
+                  <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司<i>*</i></label>
+                        <div class="col-md-6 col-sm-6 col-xs-7">
+                          <input type="text" class="form-control" required [(ngModel)]="companyForm.companyName" name="companyName" #companyName="ngModel">
+                          <div *ngIf="companyName.errors && (companyName.dirty || companyName.touched)"
+                               class="alert alert-warning">
+                            <div [hidden]="!companyName.errors.required">公司名是必需的</div>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">成立时间<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="date" class="form-control" required [(ngModel)]="companyForm.createTime" name="createTime" #createTime="ngModel">
+                        <div *ngIf="createTime.errors && (createTime.dirty || createTime.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!createTime.errors.required">成立日期是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司地址<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="companyForm.address" name="address" #address="ngModel">
+                        <div *ngIf="address.errors && (address.dirty || address.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!address.errors.required">地址是必填的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">公司规模<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="peopleCount" [(ngModel)]="companyForm.peopleCount" #pelpleCount="ngModel">
+                          <option value="少于50人">少于50人</option>
+                          <option value="50到150人">50到150人</option>
+                          <option value="150-500人">150-500人</option>
+                          <option value="500-1000人">500-1000人</option>
+                          <option value="1000-5000人">1000-5000人</option>
+                          <option value="5000-10000人">5000-10000人</option>
+                          <option value="10000人以上">10000人以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">行业<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="companyForm.industry" name="industry" #industry="ngModel">
+                        <div *ngIf="industry.errors && (industry.dirty || industry.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!industry.errors.required">行业是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">公司性质<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="nature" [(ngModel)]="companyForm.nature"  #nature="ngModel">
+                          <option value="外资（欧美）">外资（欧美）</option>
+                          <option value="外资（非欧美）">外资（非欧美）</option>
+                          <option value="合资">合资</option>
+                          <option value="国企">国企</option>
+                          <option value="民营企业">民营企业</option>
+                          <option value="上市公司">上市公司</option>
+                          <option value="创业公司">创业公司</option>
+                          <option value="政府机关">政府机关</option>
+                          <option value="事业单位">事业单位</option>
+                          <option value="非盈利机构">非盈利机构</option>
+                        </select>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                  <div class="hiddenInfo" *ngIf="hiddenInfo">
+                    <div class="row moreRevise2">
+
+                      <div class="col-md-6">
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">联系人</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="contacts" [(ngModel)]="companyForm.contacts" #contacts="ngModel">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司主页</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="homepage" [(ngModel)]="companyForm.homepage" #homepage="ngModel">
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-6">
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">联系电话</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" pattern="[0-9]{11}" [(ngModel)]="companyForm.tel" name="tel" #tel="ngModel">
+                            <div *ngIf="tel.errors && (tel.dirty || tel.touched)"
+                                 class="alert alert-warning">
+                              <div [hidden]="!tel.errors.pattern">请输入正确的手机号</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司邮箱<i>*</i></label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" pattern="\w+@\w+[.]\w+" [(ngModel)]="companyForm.email" name="email" #email="ngModel">
+                            <div *ngIf="email.errors && (email.dirty || email.touched)"
+                                 class="alert alert-warning">
+                              <div [hidden]="!email.errors.pattern">请输入正确的邮箱</div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="col-md-3 col-sm-3 col-xs-4 control-label">公司福利</label>
+                          <div class="col-md-9 col-sm-9 col-xs-8">
+                            <input type="text" class="form-control" [(ngModel)]="companyForm.welfare" name="welfare" #welfare="ngModel">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <label class="col-md-10 col-sm-3 col-xs-4 control-label area">企业介绍</label>
+                      </div>
+                      <div class="col-md-12 col-sm-12 textarea ">
+                        <textarea name="introduce" rows="15" [(ngModel)]="companyForm.introduce" #introduce="ngModel" ></textarea>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-info" [disabled]="!companyForm.form.valid" />
+                    <input type="reset" class="btn btn-warning" />
+                  </div>
+
+                </form>
+              </div>
+              <div class="infoRevise icon" (click)="revise()"></div>
+              <div class="more moreRevise" (click)="more()">{{moreInfo}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--company结束-->
+
+      <!--公司介绍开始-->
+      <div *ngIf="companyInfo">
+        <div class="row">
+          <div class="userInfo">
+            <div *ngIf="reviseThink">
+              <div class="row">
+                <div class="thinkIcon">
+                  <div class="icon"></div><h4>公司介绍</h4>
+                </div>
+
+                <div class="col-md-12 col-sm-12" >
+                  <pre>{{ companyInfo.introduce }}</pre>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      <div *ngIf="companyInfo">
+      <!--公司介绍结束-->
+
+
+    </div>
+
+  </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,62 @@
+
+<div class="container" *ngFor="let companyInfo of companyInfo" [@fadeIn]>
+  <div class="panel">
+    <h3><a>企业</a><small>（公司信息）</small></h3>
+  </div>
+
+  <div class="resume">
+
+    <div>
+      <!--company开始-->
+      <div class="row">
+        <div class="userInfo">
+          <div class="showInfo">
+            <img src="../assets/imgs/headerImg.jpg" class="headerImg" >
+            <div class="userInfoContent">
+              <h3>{{companyInfo.companyName}}</h3>
+              <span>{{companyInfo.nature}} |  {{companyInfo.peopleCount}} |{{companyInfo.industry}}</span>
+              <div class="email"><div class="icon"></div>{{companyInfo.email}}</div>
+              <div class="tel"><div class="icon"></div>{{companyInfo.tel}}</div>
+            </div>
+            <div class="hiddenInfo showInfoHidden" *ngIf="hiddenInfo">
+              <div class="container">
+                <div class=" col-md-5">
+                  <div class="groupInfo">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<span>{{companyInfo.address}}</span></div>
+                  <div class="groupInfo">联&nbsp;&nbsp;系&nbsp;&nbsp;人：<span>{{companyInfo.contacts}}</span></div>
+                </div>
+                <div class=" col-md-6">
+                  <div class="groupInfo">成立时间：<span>{{companyInfo.createTime}}</span></div>
+                  <div class="groupInfo">公司主页：<span>{{companyInfo.homepage}}</span></div>
+                </div>
+                <div class="col-md-12">
+                  <div class="groupInfo">公司福利：<span>{{companyInfo.welfare}}</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="more" (click)="more()">{{moreInfo}}</div>
+          </div>
+        </div>
+      </div>
+      <!--company结束-->
+
+      <!--thinkjob开始-->
+      <div class="row">
+        <div class="userInfo">
+          <div class="showCompanyIntroduce">
+            <div class="container">
+              <div class="thinkIcon">
+                <div class="icon"></div><h4>公司介绍</h4>
+              </div>
+              <div class="col-md-10 col-sm-11">
+                 <p>{{companyInfo.introduce}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--thinkJob结束-->
+
+    </div>
+
+  </div>
+</div>

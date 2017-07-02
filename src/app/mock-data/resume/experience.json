@@ -1,0 +1,32 @@
+[
+  {
+    "userId": "1",
+    "companyName": "南京蓬渤溪科技有限公司",
+    "work": "PHP开发工程师",
+    "peopleCount": "50到150人",
+    "industry":"计算机服务",
+    "nature": "上市公司",
+    "workAllTime": "3个月以内",
+    "workDescribe": "在该公司主要为负责web前端开发，页面布局、设计、更新、整理等。 离职原因，我所在部门是公司新开立的一所构建网上商城的部门，由于总公司亏损严重解散该部门，因此离职。"
+  },
+  {
+    "userId": "2",
+    "companyName": "南京理工大学",
+    "work": "JAVA开发工程师",
+    "peopleCount": "少于50人",
+    "industry":"计算机服务",
+    "nature": "上市公司",
+    "workAllTime": "3个月以内",
+    "workDescribe": "在该公司主要为负责web前端开发，页面布局、设计、更新、整理等。 离职原因，我所在部门是公司新开立的一所构建网上商城的部门，由于总公司亏损严重解散该部门，因此离职。"
+  },
+  {
+    "userId": "3",
+    "companyName": "沙尘暴有限公司",
+    "work": "NodeJS开发工程师",
+    "peopleCount": "少于50人",
+    "industry":"计算机服务",
+    "nature": "上市公司",
+    "workAllTime": "3个月以内",
+    "workDescribe": "在该公司主要为负责web前端开发，页面布局、设计、更新、整理等。 离职原因，我所在部门是公司新开立的一所构建网上商城的部门，由于总公司亏损严重解散该部门，因此离职。"
+  }
+]

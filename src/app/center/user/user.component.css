@@ -1,0 +1,37 @@
+.resume{margin-top: 50px;}
+.resume form label {  color: #666;  text-align: right;  }
+i{  font-size: 18px;  height: 18px;  font-style: normal;  color: #ff6000;  }
+
+.upload-container {
+  background-image: url(../../../assets/imgs/add.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100px;
+  height: 113px;
+  padding-bottom: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.fileupload {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  width: 200px;
+  height: 200px;
+}
+
+
+
+/*via噢单验证*/
+.ng-valid[required], .ng-valid.required  {  border-left: 5px solid #42A948; /* green */  }
+.ng-invalid:not(form)  {  border-left: 5px solid #a94442; /* red */  }
+
+/*---------------设备兼容---------------*/
+@media (min-width: 768px){
+
+}
+@media (min-width: 992px){
+  .resume form{ margin-top: 50px;}
+}
+@media (min-width: 1200px){
+
+}

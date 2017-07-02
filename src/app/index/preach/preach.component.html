@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10 info">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <h3 class="text-center">热门职位</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr><th>职位</th><th>年薪</th><th>地点</th></tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let partJob of partJobs">
+              <td><a [routerLink]="['/job/info', partJob._id]">{{partJob.position}}</a></td><td><span>{{partJob.salary}}</span></td><td>{{partJob.address}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+        <div class="text-right"><a routerLink="/job">查看更多 >></a></div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <h3 class="text-center">急速求职</h3>
+        <table class="table table-striped">
+          <thead>
+          <tr><th>职位</th><th>年薪</th><th>地点</th></tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let activityJob of activityJobs">
+            <td><a [routerLink]="['/job/info', activityJob._id]">{{activityJob.position}}</a></td><td><span>{{activityJob.salary}}</span></td><td>{{activityJob.address}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="text-right"><a routerLink="/job">查看更多 >></a></div>
+      </div>
+  </div>
+</div>

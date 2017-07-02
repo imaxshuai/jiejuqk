@@ -1,0 +1,46 @@
+<div class="container" [@flyIn]>
+  <div class="row">
+    <div class="panel">
+      <h4><a routerLink="/job">求职指南</a> <small>（兼职）</small></h4>
+      <form #searchPartJobForm="ngForm" (ngSubmit)="searchPartJob(searchPartJobForm.form.value)">
+        <input type="text" name="jobType" value="兼职" class="form-control hidden" [(ngModel)]="jobType" />
+        <input type="search" name="searchInfo" class="form-control" [(ngModel)]="searchPartJobForm.searchInfo" />
+        <input type="submit" value="搜索" class="btn btn-info">
+      </form>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <!--record开始-->
+    <table class="table table-hover table-striped">
+      <thead>
+      <tr>
+        <th>职位名称</th>
+        <th>公司名称</th>
+        <th>职位月薪</th>
+        <th>工作地点</th>
+        <th>投递时间</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let partJob of partJobs | paginate: { itemsPerPage: 10, currentPage: p }" [@flyIn] >
+        <td><a [routerLink]="['/job/info', partJob._id]">{{partJob.position}}</a></td>
+        <td><a [routerLink]="['/company/info', partJob.companyId]">{{partJob.companyName}}</a></td>
+        <td><div class="money">{{partJob.salary}}</div></td>
+        <td>{{partJob.address}} </td>
+        <td>{{partJob.createTime | date:"yyyy-MM-dd"}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+    <!--record结束-->
+  </div>
+
+  <div id="pagination">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+
+

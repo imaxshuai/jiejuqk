@@ -1,0 +1,19 @@
+.infos{ position: fixed;top: 80px;right:30px;}
+a{ color:#6a32bf}
+li {list-style: none;}
+.money{ color:#ff6600;font-weight: bold;}
+.form-control { border-radius: 1px; }
+a:focus, a:hover {  color: #6a32bf;  text-decoration: none;  }
+#translate {position:fixed; top:20%; left: 10%; width:130px; height:50px;z-index: 20000;}
+input:focus,textarea:focus {  outline: none;  border-color: #cfdc00; border-radius: 0;  }
+
+/*---------------设备兼容---------------*/
+@media (min-width: 768px){
+  #translate {left: 0;}
+}
+@media (min-width: 992px){
+  #translate {left: 10%; top: 80%;}
+}
+@media (min-width: 1200px){
+
+}

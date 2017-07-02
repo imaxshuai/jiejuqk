@@ -1,0 +1,67 @@
+.main-nav {
+  background: #6f5499;
+  height: 50px;
+  min-height: 50px;
+  padding: 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24);
+  z-index: 100;
+}
+.navbar{
+  border-radius: 0px;
+}
+.navbar a{
+  color:#fff;
+}
+.navbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: #fff;
+}
+
+.nav > li > a {
+  color: #fff;
+  padding-top: 14px;
+}
+.nav > li{
+  background-color: #6f5499;
+}
+
+.nav > li.active,
+.nav > li > a:hover,
+.nav > li > a:focus,
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  color: #fff;
+  background-color: #6a6688;
+}
+
+.navbar-brand-my {
+  color: #f00;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+}
+
+.main-container {
+  min-height: 666px;
+}
+
+.footer {  width: 100%;  text-align: left;  margin-top: 50px;  padding: 40px 48px;  background: #263238;  color: #fff;  position: relative;  }
+.footer li{ float: left;margin-right: 20px;}
+
+/*---------------设备兼容---------------*/
+@media (min-width: 768px){
+  .footer li { float: none}
+}
+@media (min-width: 992px){
+
+}
+@media (min-width: 1200px){
+
+}
+

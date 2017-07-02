@@ -1,0 +1,1110 @@
+<div class="container" [@flyIn]>
+  <div class="resume">
+    <app-center></app-center>
+
+    <div class="col-md-9">
+      <!--userinfo开始-->
+      <div class="row">
+        <div class="userInfo">
+          <div *ngIf="reviseInfo">
+
+            <div *ngIf="userInfo">
+              <img src="../assets/imgs/headerImg.jpg" class="headerImg">
+              <div class="userInfoContent">
+                <h3>{{userInfo.username}}</h3>
+                <div class="balance" title="充值" (click)="toggleZhi()"><div class="icon"></div>0.00元</div>
+                <img src="../assets/imgs/zhi.png" class="zhi img-responsive">
+                <span>现居住{{userInfo.live}} | {{userInfo.sex}} |（{{userInfo.birthday}}）</span>
+                <span>{{userInfo.jobStatc}} | ({{userInfo.experience}})</span>
+                <div class="email"><div class="icon"></div>{{userInfo.email}}</div>
+                <div class="tel"><div class="icon"></div>{{userInfo.tel}}</div>
+              </div>
+              <div class="hiddenInfo" *ngIf="hiddenInfo">
+                <div class="container">
+                  <div class=" col-md-4">
+                    <div class="groupInfo">户口/国籍：<span>{{userInfo.nationality}}</span></div>
+                    <div class="groupInfo">婚姻&nbsp;状态：<span>{{userInfo.marriage}}</span></div>
+                    <div class="groupInfo">身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：<span>{{userInfo.height}}</span></div>
+                    <div class="groupInfo">中文&nbsp;掌握：<span>{{userInfo.chinese}}</span></div>
+                  </div>
+                  <div class=" col-md-4">
+                    <div class="groupInfo">证&nbsp;&nbsp;件&nbsp;&nbsp;号：<span>{{userInfo.certificates}}</span></div>
+                    <div class="groupInfo">政治面貌：<span>{{userInfo.level}}</span></div>
+                    <div class="groupInfo">个人&nbsp;主页：<span>{{userInfo.homepage}}</span></div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="more" (click)="more()">{{moreInfo}}</div>
+            </div>
+
+            <div *ngIf="!userInfo">
+              <h1>请尽快完善个人基础信息</h1>
+            </div>
+
+            <div class="infoRevise icon" (click)="revise()"></div>
+          </div>
+          <div *ngIf="!reviseInfo">
+            <div class="row">
+
+              <div *ngIf="userInfo">
+                <form class="form-horizontal" #userForm="ngForm" (ngSubmit)="companySubmit(userForm.form.value)">
+                  <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">姓名<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required pattern="[\u4e00-\u9fa5a-zA-Z0-9_.,/?!@]{2,18}" [(ngModel)]="userInfo.username" name="username" #username>
+                        <div *ngIf="username.errors && (username.dirty || username.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!username.errors.required">用户名是必需的</div>
+                          <div [hidden]="!username.errors.pattern">请输入2-18位用户名</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">出生日期<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="date" class="form-control" required [(ngModel)]="userInfo.birthday" name="birthday" #birthday="ngModel">
+                        <div *ngIf="birthday.errors && (birthday.dirty || birthday.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!birthday.errors.required">出生日期是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">手机<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required pattern="[0-9]{11}" [(ngModel)]="userInfo.tel" name="tel" #tel="ngModel">
+                        <div *ngIf="tel.errors && (tel.dirty || tel.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!tel.errors.required">手机号是必需的</div>
+                          <div [hidden]="!tel.errors.pattern">请输入正确的手机号</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">邮箱<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required pattern="\w+@\w+[.]\w+" [(ngModel)]="userInfo.email" name="email" #email="ngModel">
+                        <div *ngIf="email.errors && (email.dirty || email.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!email.errors.required">邮箱是必需的</div>
+                          <div [hidden]="!email.errors.pattern">请输入正确的邮箱</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">性别<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="sex" [(ngModel)]="userInfo.sex" #sex>
+                          <option value="男">男</option>
+                          <option value="女">女</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">工作经验<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="experience" [(ngModel)]="userInfo.experience" #experience>
+                          <option value="无经验">无经验</option>
+                          <option value="应届生">应届生</option>
+                          <option value="1年以下">1年以下</option>
+                          <option value="1-2年">1-2年</option>
+                          <option value="3-5年">3-5年</option>
+                          <option value="6-10年">6-10年</option>
+                          <option value="10年以上">10年以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">求职状态<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="jobStatc" [(ngModel)]="userInfo.jobStatc" #jobStatc>
+                          <option value="目前正在找工作">目前正在找工作</option>
+                          <option value="观望有好机会会考虑">观望有好机会会考虑</option>
+                          <option value="我目前不想换工作">我目前不想换工作</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">现居住地<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="userInfo.live" name="live" #live="ngModel">
+                        <div *ngIf="live.errors && (live.dirty || live.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!live.errors.required">地址是必填的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="hiddenInfo" *ngIf="hiddenInfo">
+                    <div class="row moreRevise2">
+
+                      <div class="col-md-6">
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">户口/国籍</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="nationality" [(ngModel)]="userInfo.nationality">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">身份证号</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="certificates" [(ngModel)]="userInfo.certificates" >
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">中文掌握</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <select name="chinese" class="form-control" [(ngModel)]="userInfo.chinese" #chinese>
+                              <option value="不会">不会</option>
+                              <option value="简单交流">简单交流</option>
+                              <option value="较熟练">较熟练</option>
+                              <option value="非常熟练">非常熟练</option>
+                              <option value="中文宗师">中文宗师</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">个人主页</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="homepage" [(ngModel)]="userInfo.homepage">
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-6">
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">婚姻状态</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <select name="marriage" class="form-control" [(ngModel)]="userInfo.marriage" #marriage>
+                              <option value="未婚">未婚</option>
+                              <option value="已婚">已婚</option>
+                              <option value="保密">保密</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">政治面貌</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="level" [(ngModel)]="userInfo.level" >
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">身高</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="height" [(ngModel)]="userInfo.height">
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-info" [disabled]="!userForm.form.valid" />
+                    <input type="reset" class="btn btn-warning" />
+                  </div>
+
+                </form>
+              </div>
+
+              <div *ngIf="!userInfo">
+                <form class="form-horizontal" #userForm="ngForm" (ngSubmit)="companySubmit(userForm.form.value)">
+                  <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">姓名<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required pattern="[\u4e00-\u9fa5a-zA-Z0-9_.,/?!@]{2,18}" [(ngModel)]="userForm.username" name="username" #username>
+                        <div *ngIf="username.errors && (username.dirty || username.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!username.errors.required">用户名是必需的</div>
+                          <div [hidden]="!username.errors.pattern">请输入2-18位用户名</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">出生日期<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="date" class="form-control" required [(ngModel)]="userForm.birthday" name="birthday" #birthday="ngModel">
+                        <div *ngIf="birthday.errors && (birthday.dirty || birthday.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!birthday.errors.required">出生日期是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">手机<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required pattern="[0-9]{11}" [(ngModel)]="userForm.tel" name="tel" #tel="ngModel">
+                        <div *ngIf="tel.errors && (tel.dirty || tel.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!tel.errors.required">手机号是必需的</div>
+                          <div [hidden]="!tel.errors.pattern">请输入正确的手机号</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">邮箱<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required pattern="\w+@\w+[.]\w+" [(ngModel)]="userForm.email" name="email" #email="ngModel">
+                        <div *ngIf="email.errors && (email.dirty || email.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!email.errors.required">邮箱是必需的</div>
+                          <div [hidden]="!email.errors.pattern">请输入正确的邮箱</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">性别<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="sex" [(ngModel)]="userForm.sex" #sex>
+                          <option value="男">男</option>
+                          <option value="女">女</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">工作经验<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="experience" [(ngModel)]="userForm.experience" #experience>
+                          <option value="无经验">无经验</option>
+                          <option value="应届生">应届生</option>
+                          <option value="1年以下">1年以下</option>
+                          <option value="1-2年">1-2年</option>
+                          <option value="3-5年">3-5年</option>
+                          <option value="6-10年">6-10年</option>
+                          <option value="10年以上">10年以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">求职状态<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="jobStatc" [(ngModel)]="userForm.jobStatc" #jobStatc>
+                          <option value="目前正在找工作">目前正在找工作</option>
+                          <option value="观望有好机会会考虑">观望有好机会会考虑</option>
+                          <option value="我目前不想换工作">我目前不想换工作</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">现居住地<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="userForm.live" name="live" #live="ngModel">
+                        <div *ngIf="live.errors && (live.dirty || live.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!live.errors.required">地址是必填的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="hiddenInfo" *ngIf="hiddenInfo">
+                    <div class="row moreRevise2">
+
+                      <div class="col-md-6">
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">户口/国籍</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="userForm.nationality" [(ngModel)]="userForm.nationality">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">身份证号</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="certificates" [(ngModel)]="userForm.certificates" >
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">家庭住址</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="homeAddress" [(ngModel)]="userForm.homeAddress">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">个人主页</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="homepage" [(ngModel)]="userForm.homepage">
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-6">
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">婚姻状态</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <select name="marriage" class="form-control" [(ngModel)]="userForm.marriage" #marriage>
+                              <option value="未婚">未婚</option>
+                              <option value="已婚">已婚</option>
+                              <option value="保密">保密</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">政治面貌</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="level" [(ngModel)]="userForm.level" >
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-6 col-sm-3 col-xs-4 control-label">身高</label>
+                          <div class="col-md-6 col-sm-6 col-xs-7">
+                            <input type="text" class="form-control" name="height" [(ngModel)]="userForm.height">
+                          </div>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-info" [disabled]="!userForm.form.valid" />
+                    <input type="reset" class="btn btn-warning" />
+                  </div>
+
+                </form>
+              </div>
+
+            </div>
+            <div class="infoRevise icon" (click)="revise()"></div>
+            <div class="more moreRevise" (click)="more()">{{moreInfo}}</div>
+          </div>
+        </div>
+      </div>
+      <!--userinfo结束-->
+
+      <!--thinkjob开始-->
+      <div class="row">
+        <div class="userInfo">
+          <div *ngIf="reviseThink">
+            <div class="container">
+
+              <div class="thinkIcon">
+                <div class="icon"></div><h4>求职意向</h4>
+              </div>
+
+              <div *ngIf="thinkJob">
+                <div class="row">
+                  <div class=" col-md-4">
+                    <div class="groupInfo">期望薪资：<span>{{thinkJob.salary}}</span></div>
+                    <div class="groupInfo">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;能：<span>{{thinkJob.work}}</span></div>
+                    <div class="groupInfo">到岗时间：<span>{{thinkJob.entryTime}}</span></div>
+                  </div>
+                  <div class=" col-md-4">
+                    <div class="groupInfo">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点：<span>{{thinkJob.workAddress}}</span></div>
+                    <div class="groupInfo">行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：<span>{{thinkJob.industry}}</span></div>
+                    <div class="groupInfo">工作类型：<span>{{thinkJob.jobType}}</span></div>
+                  </div>
+                </div>
+                <div class="row left">
+                  <div class="col-md-1">
+                    <div class="groupInfo">自我评价：</div>
+                  </div>
+                  <div class="col-md-7 col-sm-8 ">
+                    <span>{{thinkJob.aboutMe}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="!thinkJob">
+                <h1>请尽快完善求职 意向</h1>
+              </div>
+            </div>
+            <div class="infoRevise icon" (click)="thinkRevise()"></div>
+          </div>
+          <div *ngIf="!reviseThink">
+            <div class="row">
+              <div *ngIf="thinkJob">
+                <form class="form-horizontal" #thinkJobForm="ngForm" (ngSubmit)="thinkJobSubmit(thinkJobForm.form.value)" >
+                  <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">月薪<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="thinkJob.salary" name="salary" #salary="ngModel">
+                        <div *ngIf="salary.errors && (salary.dirty || salary.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!salary.errors.required">月薪是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">地点<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="thinkJob.workAddress" name="workAddress" #workAddress="ngModel">
+                        <div *ngIf="workAddress.errors && (workAddress.dirty || workAddress.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!workAddress.errors.required">地点是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">到岗时间</label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" [(ngModel)]="thinkJob.entryTime" name="entryTime" #entryTime="ngModel">
+                          <option value="随时">随时</option>
+                          <option value="一周内">一周内</option>
+                          <option value="一个月内">一个月内</option>
+                          <option value="三个月内">三个月内</option>
+                          <option value="待定">待定</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">职位<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="thinkJob.work" name="work" #work="ngModel">
+                        <div *ngIf="work.errors && (work.dirty || work.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!work.errors.required">职位是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">行业</label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" name="industry" [(ngModel)]="thinkJob.industry" #industry="ngModel">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">工作类型</label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="jobType" [(ngModel)]="thinkJob.jobType" #jobType="ngModel">
+                          <option value="全职">全职</option>
+                          <option value="兼职">兼职</option>
+                          <option value="实习">实习</option>
+                          <option value="兼/全职">兼/全职</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <input name="teacherAgreement" type="checkbox" class="checkbox"  [(ngModel)]="thinkJob.teacherAgreement" />签订<a routerLink="/agreement/teacher">家教服务条款</a>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-12">
+                    <label class="col-md-3 col-sm-3 col-xs-4 control-label">自我评价</label>
+                    <div class="col-md-6 col-sm-6 col-xs-7 textarea">
+                      <textarea rows="5" cols="200" name="aboutMe" [(ngModel)]="thinkJob.aboutMe" #aboutMe="ngModel"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-info" [disabled]="!thinkJobForm.form.valid" />
+                    <input type="reset" class="btn btn-warning" />
+                  </div>
+
+                </form>
+              </div>
+
+              <div *ngIf="!thinkJob">
+                <form class="form-horizontal" #thinkJobForm="ngForm" (ngSubmit)="thinkJobSubmit(thinkJobForm.form.value)" >
+                  <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">月薪<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="thinkJobForm.salary" name="salary" #salary="ngModel">
+                        <div *ngIf="salary.errors && (salary.dirty || salary.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!salary.errors.required">月薪是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">地点<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="thinkJobForm.workAddress" name="workAddress" #workAddress="ngModel">
+                        <div *ngIf="workAddress.errors && (workAddress.dirty || workAddress.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!workAddress.errors.required">地点是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">到岗时间</label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" [(ngModel)]="thinkJobForm.entryTime" name="entryTime" #entryTime="ngModel">
+                          <option value="随时">随时</option>
+                          <option value="一周内">一周内</option>
+                          <option value="一个月内">一个月内</option>
+                          <option value="三个月内">三个月内</option>
+                          <option value="待定">待定</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">职位<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="thinkJobForm.work" name="work" #work="ngModel">
+                        <div *ngIf="work.errors && (work.dirty || work.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!work.errors.required">职位是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">行业</label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" name="industry" [(ngModel)]="thinkJobForm.industry" #industry="ngModel">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">工作类型</label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="jobType" [(ngModel)]="thinkJobForm.jobType" #jobType="ngModel">
+                          <option value="全职">全职</option>
+                          <option value="兼职">兼职</option>
+                          <option value="实习">实习</option>
+                          <option value="兼/全职">兼/全职</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-md-12">
+                        <label><input name="teacherAgreement" type="checkbox" class="checkbox" [(ngModel)]="thinkJobForm.teacherAgreement" />签订<a routerLink="/agreement/teacher">家教服务条款</a></label>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-12">
+                    <label class="col-md-3 col-sm-3 col-xs-4 control-label">自我评价</label>
+                    <div class="col-md-6 col-sm-6 col-xs-7 textarea">
+                      <textarea rows="5" cols="200" name="aboutMe" [(ngModel)]="thinkJobForm.aboutMe" #aboutMe="ngModel"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-info" [disabled]="!thinkJobForm.form.valid" />
+                    <input type="reset" class="btn btn-warning" />
+                  </div>
+
+                </form>
+              </div>
+            </div>
+            <div class="infoRevise icon" (click)="thinkRevise()"></div>
+          </div>
+        </div>
+      </div>
+      <!--thinkJob结束-->
+
+      <!--experience开始-->
+      <div class="row">
+        <div class="userInfo">
+          <div *ngIf="reviseExperience">
+            <div class="container">
+              <div class="experienceIcon">
+                <div class="icon"></div><h4>工作经验</h4>
+              </div>
+              <div *ngIf="experience">
+                <div class="row">
+                  <div class=" col-md-4">
+                    <div class="groupInfo">公&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;司：<span>{{experience.companyName}}</span></div>
+                    <div class="groupInfo">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;能：<span>{{experience.work}}</span></div>
+                    <div class="groupInfo">行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：<span>{{experience.industry}}</span></div>
+                  </div>
+                  <div class=" col-md-4">
+                    <div class="groupInfo">公司规模：<span>{{experience.peopleCount}}</span></div>
+                    <div class="groupInfo">公司性质：<span>{{experience.nature}}</span></div>
+                    <div class="groupInfo">工作时长：<span>{{experience.workAllTime}}</span></div>
+                  </div>
+                </div>
+                <div class="row left">
+                  <div class="col-md-1">
+                    <div class="groupInfo">工作描述：</div>
+                  </div>
+                  <div class="col-md-7 col-sm-8 ">
+                    <span>{{experience.workDescribe}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="!experience">
+                <div class="row">
+                  <h1>静尽快完善工作经验信息</h1>
+                </div>
+              </div>
+
+            </div>
+            <div class="infoRevise icon" (click)="experienceRevise()"></div>
+          </div>
+          <div *ngIf="!reviseExperience">
+            <div class="row">
+              <div *ngIf="experience">
+                <form class="form-horizontal" #experienceForm="ngForm" (ngSubmit)="experienceSubmit(experienceForm.form.value)">
+                  <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="experience.companyName" name="companyName" #companyName="ngModel">
+                        <div *ngIf="companyName.errors && (companyName.dirty || companyName.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!companyName.errors.required">公司名是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">职位<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="experience.work" name="work" #work="ngModel">
+                        <div *ngIf="work.errors && (work.dirty || work.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!work.errors.required">职位是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司规模<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="peopleCount" [(ngModel)]="experience.peopleCount" #peopleCount="ngModel">
+                          <option value="少于50人">少于50人</option>
+                          <option value="50到150人">50到150人</option>
+                          <option value="150-500人">150-500人</option>
+                          <option value="500-1000人">500-1000人</option>
+                          <option value="1000-5000人">1000-5000人</option>
+                          <option value="5000-10000人">5000-10000人</option>
+                          <option value="10000人以上">10000人以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">行业<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required  name="industry" [(ngModel)]="experience.industry" #industry="ngModel">
+                        <div *ngIf="industry.errors && (industry.dirty || industry.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!industry.errors.required">行业是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">公司性质</label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="nature" [(ngModel)]="experience.nature" #nature="ngModel">
+                          <option value="外资（欧美）">外资（欧美）</option>
+                          <option value="外资（非欧美）">外资（非欧美）</option>
+                          <option value="合资">合资</option>
+                          <option value="国企">国企</option>
+                          <option value="民营企业">民营企业</option>
+                          <option value="上市公司">上市公司</option>
+                          <option value="创业公司">创业公司</option>
+                          <option value="政府机关">政府机关</option>
+                          <option value="事业单位">事业单位</option>
+                          <option value="非盈利机构">非盈利机构</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">工作总时长<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="workAllTime" [(ngModel)]="experience.workAllTime" #workAllTime="ngModel">
+                          <option value="3个月以内">3个月以内</option>
+                          <option value="3-6个月">3-6个月</option>
+                          <option value="6-12个月">6-12个月</option>
+                          <option value="1-年">1-年</option>
+                          <option value="2-3年">2-3年</option>
+                          <option value="3-5年">3-5年</option>
+                          <option value="5年以上">5年以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-12">
+                    <label class="col-md-3 col-sm-3 col-xs-4 control-label">工作描述</label>
+                    <div class="col-md-6 col-sm-6 col-xs-7 textarea">
+                      <textarea name="workDescribe" [(ngModel)]="experience.workDescribe" #workDescribe="ngModel"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-info" [disabled]="!experienceForm.form.valid" />
+                    <input type="reset" class="btn btn-warning" />
+                  </div>
+
+                </form>
+              </div>
+
+              <div *ngIf="!experience">
+                <form class="form-horizontal" #experienceForm="ngForm" (ngSubmit)="experienceSubmit(experienceForm.form.value)">
+                  <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="experienceForm.companyName" name="companyName" #companyName="ngModel">
+                        <div *ngIf="companyName.errors && (companyName.dirty || companyName.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!companyName.errors.required">公司名是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">职位<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="experienceForm.work" name="work" #work="ngModel">
+                        <div *ngIf="work.errors && (work.dirty || work.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!work.errors.required">职位是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">公司规模<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="peopleCount" [(ngModel)]="experienceForm.peopleCount" #peopleCount="ngModel">
+                          <option value="少于50人">少于50人</option>
+                          <option value="50到150人">50到150人</option>
+                          <option value="150-500人">150-500人</option>
+                          <option value="500-1000人">500-1000人</option>
+                          <option value="1000-5000人">1000-5000人</option>
+                          <option value="5000-10000人">5000-10000人</option>
+                          <option value="10000人以上">10000人以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">行业<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required  name="industry" [(ngModel)]="experienceForm.industry" #industry="ngModel">
+                        <div *ngIf="industry.errors && (industry.dirty || industry.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!industry.errors.required">行业是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">公司性质</label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="nature" [(ngModel)]="experienceForm.nature" #nature="ngModel">
+                          <option value="外资（欧美）">外资（欧美）</option>
+                          <option value="外资（非欧美）">外资（非欧美）</option>
+                          <option value="合资">合资</option>
+                          <option value="国企">国企</option>
+                          <option value="民营企业">民营企业</option>
+                          <option value="上市公司">上市公司</option>
+                          <option value="创业公司">创业公司</option>
+                          <option value="政府机关">政府机关</option>
+                          <option value="事业单位">事业单位</option>
+                          <option value="非盈利机构">非盈利机构</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">工作总时长<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="workAllTime" [(ngModel)]="experienceForm.workAllTime" #workAllTime="ngModel">
+                          <option value="3个月以内">3个月以内</option>
+                          <option value="3-6个月">3-6个月</option>
+                          <option value="6-12个月">6-12个月</option>
+                          <option value="1-年">1-年</option>
+                          <option value="2-3年">2-3年</option>
+                          <option value="3-5年">3-5年</option>
+                          <option value="5年以上">5年以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-12">
+                    <label class="col-md-3 col-sm-3 col-xs-4 control-label">工作描述</label>
+                    <div class="col-md-6 col-sm-6 col-xs-7 textarea">
+                      <textarea name="workDescribe" [(ngModel)]="experienceForm.workDescribe" #workDescribe="ngModel"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-info" [disabled]="!experienceForm.form.valid" />
+                    <input type="reset" class="btn btn-warning" />
+                  </div>
+
+                </form>
+              </div>
+            </div>
+            <div class="infoRevise icon" (click)="experienceRevise()"></div>
+          </div>
+        </div>
+      </div>
+      <!--experience结束-->
+
+      <!--education开始-->
+      <div class="row">
+        <div class="userInfo">
+
+          <div *ngIf="reviseEducation">
+
+            <div class="container">
+              <div class="experienceIcon">
+                <div class="icon"></div><h4>教育情况</h4>
+              </div>
+              <div *ngIf="education">
+                <div class="row">
+                  <div class=" col-md-4">
+                    <div class="groupInfo">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校：<span>{{education.school}}</span></div>
+                    <div class="groupInfo">学历&nbsp;/&nbsp;位：<span>{{education.degree}}</span></div>
+                  </div>
+                  <div class=" col-md-4">
+                    <div class="groupInfo">离校时间：<span>{{education.leaveSchoolTime}}</span></div>
+                    <div class="groupInfo">专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：<span>{{education.major}}</span></div>
+                  </div>
+                </div>
+                <div class="row left">
+                  <div class="col-md-1">
+                    <div class="groupInfo">在校奖励：</div>
+                  </div>
+                  <div class="col-md-7 col-sm-8 ">
+                    <span>{{education.award}}</span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!education">
+                <h1>请尽快完善教育信息</h1>
+              </div>
+
+
+            </div>
+            <div class="infoRevise icon" (click)="educationRevise()"></div>
+          </div>
+          <div *ngIf="!reviseEducation">
+            <div class="row">
+              <div *ngIf="education">
+                <form class="form-horizontal" #educationForm="ngForm" (ngSubmit)="educationSubmit(educationForm.form.value)">
+                <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                <div class="col-md-6">
+
+                  <div class="form-group">
+                    <label class="col-md-6 col-sm-3 col-xs-4 control-label">学校<i>*</i></label>
+                    <div class="col-md-6 col-sm-6 col-xs-7">
+                      <input type="text" class="form-control" required [(ngModel)]="education.school" name="school" #school="ngModel">
+                      <div *ngIf="school.errors && (school.dirty || school.touched)"
+                           class="alert alert-warning">
+                        <div [hidden]="!school.errors.required">学校名是必需的</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-6 col-sm-3 col-xs-4 control-label">专业<i>*</i></label>
+                    <div class="col-md-6 col-sm-6 col-xs-7">
+                      <input type="text" class="form-control" required [(ngModel)]="education.major" name="major" #major="ngModel">
+                      <div *ngIf="major.errors && (major.dirty || major.touched)"
+                           class="alert alert-warning">
+                        <div [hidden]="!major.errors.required">专业是必需的</div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+
+                  <div class="form-group">
+                    <label class="col-md-4 col-sm-3 col-xs-4 control-label">离校时间<i>*</i></label>
+                    <div class="col-md-6 col-sm-6 col-xs-7">
+                      <input type="date" class="form-control" required [(ngModel)]="education.leaveSchoolTime" name="leaveSchoolTime" #leaveSchoolTime="ngModel">
+                      <div *ngIf="leaveSchoolTime.errors && (leaveSchoolTime.dirty || leaveSchoolTime.touched)"
+                           class="alert alert-warning">
+                        <div [hidden]="!leaveSchoolTime.errors.required">离校时间是必需的</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-4 col-sm-3 col-xs-4 control-label">学历/位</label>
+                    <div class="col-md-6 col-sm-6 col-xs-7">
+                      <select class="form-control" name="degree" [(ngModel)]="education.degree" #degree="ngModel">
+                        <option value="中技">中技</option>
+                        <option value="中专">中专</option>
+                        <option value="大专">大专</option>
+                        <option value="本科">本科</option>
+                        <option value="硕士">硕士</option>
+                        <option value="博士">博士</option>
+                        <option value="MBA">MBA</option>
+                      </select>
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="col-md-12">
+                  <label class="col-md-3 col-sm-3 col-xs-4 control-label">在校奖励</label>
+                  <div class="col-md-6 col-sm-6 col-xs-7 textarea">
+                    <textarea name="award" [(ngModel)]="education.award" #award="ngModel"></textarea>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <input type="submit" class="btn btn-info" [disabled]="!educationForm.form.valid"/>
+                  <input type="reset" class="btn btn-warning" />
+                </div>
+
+              </form>
+              </div>
+
+              <div *ngIf="!education">
+                <form class="form-horizontal" #educationForm="ngForm" (ngSubmit)="educationSubmit(educationForm.form.value)">
+                  <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">学校<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="educationForm.school" name="school" #school="ngModel">
+                        <div *ngIf="school.errors && (school.dirty || school.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!school.errors.required">学校名是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-3 col-xs-4 control-label">专业<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="text" class="form-control" required [(ngModel)]="educationForm.major" name="major" #major="ngModel">
+                        <div *ngIf="major.errors && (major.dirty || major.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!major.errors.required">专业是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">离校时间<i>*</i></label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <input type="date" class="form-control" required [(ngModel)]="educationForm.leaveSchoolTime" name="leaveSchoolTime" #leaveSchoolTime="ngModel">
+                        <div *ngIf="leaveSchoolTime.errors && (leaveSchoolTime.dirty || leaveSchoolTime.touched)"
+                             class="alert alert-warning">
+                          <div [hidden]="!leaveSchoolTime.errors.required">离校时间是必需的</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-md-4 col-sm-3 col-xs-4 control-label">学历/位</label>
+                      <div class="col-md-6 col-sm-6 col-xs-7">
+                        <select class="form-control" name="degree" [(ngModel)]="educationForm.degree" #degree="ngModel">
+                          <option value="中技">中技</option>
+                          <option value="中专">中专</option>
+                          <option value="大专">大专</option>
+                          <option value="本科">本科</option>
+                          <option value="硕士">硕士</option>
+                          <option value="博士">博士</option>
+                          <option value="MBA">MBA</option>
+                        </select>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <div class="col-md-12">
+                    <label class="col-md-3 col-sm-3 col-xs-4 control-label">在校奖励</label>
+                    <div class="col-md-6 col-sm-6 col-xs-7 textarea">
+                      <textarea name="award" [(ngModel)]="educationForm.award" #award="ngModel"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-info" [disabled]="!educationForm.form.valid"/>
+                    <input type="reset" class="btn btn-warning" />
+                  </div>
+
+                </form>
+              </div>
+            </div>
+            <div class="infoRevise icon" (click)="educationRevise()"></div>
+          </div>
+        </div>
+      </div>
+      <!--education结束-->
+
+    </div>
+
+
+
+
+  </div>
+</div>
+
+

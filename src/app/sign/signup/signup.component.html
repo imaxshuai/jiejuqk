@@ -1,0 +1,53 @@
+<div id="login" class="container" [@flyIn]>
+  <div class="col-md-6 col-sm-6 col-xs-0 ">
+    <img src="../assets/imgs/login_left.png" class="img-responsive">
+  </div>
+  <div class=" col-md-5  col-sm-5  col-xs-11">
+    <form method="post" action="" #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm.form.value)">
+    <div class="infos">
+      <div *ngIf="username.errors && (username.dirty || username.touched)"
+           class="alert alert-warning">
+        <div [hidden]="!username.errors.required">用户名是必需的</div>
+        <div [hidden]="!username.errors.pattern">请输入2-18位用户名</div>
+      </div>
+      <div *ngIf="password.errors && (password.dirty || password.touched)"
+           class="alert alert-warning">
+        <div [hidden]="!password.errors.required">密码是必需的</div>
+        <div [hidden]="!password.errors.pattern">6-20个字母、数字、_ . , / ? ! @</div>
+      </div>
+      <div *ngIf="re_password.errors && (re_password.dirty || re_password.touched)"
+           class="alert alert-warning">
+        <div [hidden]="!re_password.errors.required">请再次输入密码</div>
+      </div>
+      <div *ngIf="(re_password.value !== password.value) && (re_password.dirty || re_password.touched)" class="alert alert-warning">
+        两次输入密码不同
+      </div>
+      <div *ngIf="tel.errors && (tel.dirty || tel.touched)"
+           class="alert alert-warning">
+        <div [hidden]="!tel.errors.required">手机号是必需的</div>
+        <div [hidden]="!tel.errors.pattern">请填写正确的手机号</div>
+      </div>
+      <div *ngIf="email.errors && (email.dirty || email.touched)"
+           class="alert alert-warning">
+        <div [hidden]="!email.errors.required">邮箱是必需的</div>
+        <div [hidden]="!email.errors.pattern">请填写正确的邮箱</div>
+      </div>
+
+    </div>
+
+
+      <input type="text" name="username" placeholder="用户名/昵称" required pattern="[a-zA-Z0-9_.,/?!@]{2,18}"  class="form-control" [(ngModel)]="user.username" #username="ngModel" />
+
+      <input type="password" name="password" placeholder="密码" required pattern="[0-9a-zA-Z_.,/?!@]{6,20}"  class="form-control" [(ngModel)]="user.password" #password="ngModel" />
+
+      <input type="password" name="re_password" placeholder="请再次输入密码" required  class="form-control" [(ngModel)]="user.re_password" #re_password="ngModel" />
+
+      <input type="text" name="tel" placeholder="手机号" required pattern="[0-9]{11}"  class="form-control" [(ngModel)]="user.tel" #tel="ngModel" />
+      <input type="text" name="email" placeholder="邮箱" required pattern="\w+@\w+[.]\w+"  class="form-control" [(ngModel)]="user.email" #email="ngModel" />
+
+      <label><input name="agreement" type="checkbox" checked="checked"  value="我已阅读协议" [(ngModel)]="user.agreement" #agreement="ngModel"  />我已阅读协议 <a routerLink="/safety">服务声明</a></label>
+      <input type="submit" value="注册" [disabled]="!signupForm.form.valid || re_password.value !== password.value || agreement.value == false || agreement.value == undefined">
+      <a routerLink="/signin">已有账号？ 点击登陆！</a>
+    </form>
+  </div>
+</div>

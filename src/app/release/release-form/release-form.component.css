@@ -1,0 +1,4 @@
+i{ padding: 0 2px; color: #f00;font-weight: bold;}
+/*via噢单验证*/
+.ng-valid[required], .ng-valid.required  {  border-left: 5px solid #42A948; /* green */  }
+.ng-invalid:not(form)  {  border-left: 5px solid #a94442; /* red */  }

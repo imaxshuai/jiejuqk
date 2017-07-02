@@ -1,0 +1,65 @@
+.resume{margin-top: 50px;}
+.resume .userInfo{ padding: 10px;border-bottom: 1px solid #aaa;position: relative;min-height: 160px;}
+.resume .userInfo:hover{ border: 1px solid #6f5499;margin: -1px -1px 0 -1px ;border-radius: 3px;}
+.resume .userInfo:hover .infoRevise{ display: block;}
+.resume .userInfo .headerImg{ width:90px;height:110px;margin: 0 20px 20px 0;display: inline-block;float: left}
+.resume .userInfo .userInfoContent span{ display: block;padding:0 0 10px 0;}
+.resume .userInfo .userInfoContent{ }
+.resume .userInfo .userInfoContent div{ display: inline-block;line-height: 20px;}
+.resume .userInfo .userInfoContent .icon,.icon{ width:20px;height:15px;display: inline-block;margin:0 5px 0 0; background:url('../imgs/icon_resume.png') no-repeat top -142px right 5px;}
+h4{ color: #6f5499;font-weight: bold;display: inline-block;padding-left: 5px;}
+.experienceIcon .icon{width: 33px;height: 23px; background:url('../imgs/icon_resume.png') no-repeat top -92px left -33px;}
+.thinkIcon .icon{width: 33px;height: 23px; background:url('../imgs/icon_resume.png') no-repeat top -34px left -33px;}
+.resume .userInfo .userInfoContent .email,.resume .userInfo .userInfoContent .tel{width: 250px;}
+.resume .userInfo .userInfoContent .email .icon{background:url('../imgs/icon_resume.png') no-repeat top -161px right 0;}
+.resume .userInfo .more{ position:absolute;top:170px;right:10px;padding: 5px 10px;  cursor: pointer;}
+.resume .userInfo .moreRevise{ top:430px;right:10px;}
+.resume .userInfo .infoRevise{ cursor: pointer;background:url('../imgs/icon_resume.png') no-repeat top -22px left -283px;position: absolute;top:20px; right: 20px;}
+.resume .userInfo .infoRevise:hover{ background:url('../imgs/icon_resume.png') no-repeat top -22px left -263px;}
+.resume .userInfo .hiddenInfo { clear: both;padding: 10px; background-color: rgba(111,84,153,0.1); margin: 10px auto;border:1px solid rgba(111,84,153,0.3)}
+.resume .userInfo  .groupInfo{ color:#666;font-weight: bold;padding: 5px 0;}
+.resume .userInfo  .groupInfo span{color:#333;font-weight: 100;padding-left: 10%}
+.resume .userInfo .userInfoContent span{ display: block;padding:0 0 10px 0;}
+
+
+.resume .userInfo form input,.form-control{ height: 30px;border-radius: 0;display: inline-block;line-height: 30px;padding: 0 12px;}
+.resume .userInfo form .form-group{height: 55px; overflow: hidden;margin-bottom: 0;}
+.resume .userInfo form .moreRevise2 .form-group{height: 40px;}
+.resume .userInfo form label{ color: #666;text-align: right}
+.resume .userInfo form .alert{padding: 0}
+i{ font-size:18px; height: 18px;  font-style: normal;  color: #ff6000;}
+.row{margin: 0; }
+.text-center input{ margin: 10px 30px;padding:0 20px;}
+
+.left {margin-top: 20px;}
+.left .groupInfo{ width: 100px;}
+.left span{ padding-left: 20px;display: inline-block;}
+
+textarea {width: 110%;}
+
+.checkbox{ position: relative;top:9px;}
+/*via噢单验证*/
+.ng-valid[required], .ng-valid.required  {  border-left: 5px solid #42A948; /* green */  }
+.ng-invalid:not(form)  {  border-left: 5px solid #a94442; /* red */  }
+
+/*钱包*/
+.resume .userInfo .zhi{ width:0;height:0;display: inline-block;position: relative;top:0;left: 0;}
+.resume .userInfo .userInfoContent .balance{position: absolute;top:35px;left:230px;line-height: 24px;color: #f00;font-weight: bold}
+.resume .userInfo .userInfoContent .balance .icon{background:url('../imgs/icon_resume.png') no-repeat top -57px left -262px;width: 24px;height:24px;float: left;cursor:pointer;}
+
+
+/*---------------设备兼容---------------*/
+@media (min-width: 768px){
+  .resume .userInfo .moreRevise{ top:430px;right:10px;}
+  .resume .userInfo .infoRevise{ display: block}
+  .resume .userInfo .more{ top:115px;}
+  .resume .userInfo .zhi{position: absolute;top:10px;left: 70%;}
+  .resume .userInfo .userInfoContent .balance{ left: 350px;}
+}
+@media (min-width: 992px){
+  .resume .userInfo .moreRevise{ top:202px;right:10px;}
+  .resume .userInfo .infoRevise{ display: none}
+}
+@media (min-width: 1200px){
+
+}

@@ -1,0 +1,71 @@
+<div *ngFor="let jobInfo of jobInfo" [@fadeIn]>
+  <div class="container">
+    <div class="row">
+      <div class="panel">
+        <h3><a>职位</a><small>（职位信息）</small></h3>
+      </div>
+    </div>
+    <div class="jobDetail">
+      <div class="panel">
+        <div class="panel-heading">
+          <span>更新：</span><span class="detailSpan">{{jobInfo.createTime | date:"yyyy-MM-dd"}}</span>
+          <span>浏览：</span><span class="detailSpan">303人</span>
+          <span>申请：</span><span class="detailSpan">9人</span>
+        </div>
+      </div>
+      <div class="panel-body">
+        <h2>{{jobInfo.position}}</h2>
+        <h1>{{jobInfo.salary}}<small>元/月</small></h1>
+        <p>{{jobInfo.companyName}}</p>
+        <ul>
+          <li>招{{jobInfo.number}}人 |</li>
+          <li>{{jobInfo.record}} |</li>
+          <li>{{jobInfo.experience}} </li>
+          <li *ngIf="jobInfo.overseas">| 具备海外签证资格</li>
+        </ul>
+        <div class="tel" *ngIf="currentUser">{{jobInfo.tel}}</div>
+        <div class="tel" *ngIf="!currentUser" (click)="showTel()">电话咨询</div>
+        <div class="now" (click)="showChat()">在线交谈</div>
+        <h4>职位描述</h4>
+        <p>{{jobInfo.desription}}</p>
+        <h4>任务要求</h4>
+        <p>
+          {{jobInfo.mission}}
+        </p>
+        <div class="kong" style="height:120px; "></div>
+        <div class="contact">
+          <button class="btn">申请职位</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chat" *ngIf="chat" >
+  <i class="closeChat" (click)="closeChat()">X</i>
+  <div class="chat-header">
+    <h4>张经理</h4>
+  </div>
+  <div class="char-body">
+    <dl class="vhe m1">
+      <dt><a class="char-header01"></a><span>2017-02-11 18:35:41</span></dt>
+      <dd>Good morning.</dd>
+    </dl>
+    <dl class="me m1">
+      <dt><a class="char-header02"></a><span>2017-02-11 18:36:01</span></dt>
+      <dd>Good morning. Are you James Taylor??</dd>
+    </dl>
+    <dl class="he m1">
+      <dt><a class="char-header01"></a><span>2017-02-11 18:45:41</span></dt>
+      <dd>Yes, and ...?</dd>
+    </dl>
+    <dl class="vme m1">
+      <dt><a class="char-header02"></a><span>2017-02-11 18:51:32</span></dt>
+      <dd>Welcome to Beijing, President Taylor. I'm Wang Dong, the secretary of the foreign affairs office from China Bright Advertising Company. Please call me Wang.? James Taylor: Oh, nice to meet you, Wang.?</dd>
+    </dl>
+  </div>
+  <div class="chat-footer">
+    <textarea name="charValue" class="chatInput" placeholder="请输入聊天内容"></textarea>
+  </div>
+
+</div>

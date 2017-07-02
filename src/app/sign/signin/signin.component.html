@@ -1,0 +1,29 @@
+<div id="login" class="container" [@flyIn]>
+  <div class="col-md-6 col-sm-6 col-xs-0 ">
+    <img src="../assets/imgs/login_left.png" class="img-responsive">
+  </div>
+  <div class=" col-md-5  col-sm-5  col-xs-11">
+    <form #signin="ngForm" (ngSubmit)="signin.form.valid && doLogin()" novalidate  >
+      <div class="infos">
+        <div *ngIf="username.errors && (username.dirty || username.touched)"
+             class="alert alert-warning">
+          <div [hidden]="!username.errors.required">用户名是必需的</div>
+          <div [hidden]="!username.errors.pattern">请输入2-18位用户名</div>
+        </div>
+        <div *ngIf="password.errors && (password.dirty || password.touched)"
+             class="alert alert-warning">
+          <div [hidden]="!password.errors.required">密码是必需的</div>
+          <div [hidden]="!password.errors.pattern">6-20个字母、数字、_ . , / ? ! @</div>
+        </div>
+      </div>
+
+
+      <input type="text" name="username" placeholder="用户名/手机号" required pattern="[a-zA-Z0-9_.,/?!@]{2,18}"  class="form-control" [(ngModel)]="user.username" #username="ngModel" />
+      <input type="password" name="password" placeholder="密码" required pattern="[0-9a-zA-Z_.,/?!@]{6,20}"  class="form-control" [(ngModel)]="user.password" #password="ngModel" />
+
+
+      <input type="submit" value="登陆" [disabled]="signin.invalid">
+      <a routerLink="/signup" >没有账号？ 点击注册!</a>
+    </form>
+  </div>
+</div>

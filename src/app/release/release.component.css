@@ -1,0 +1,25 @@
+.job .panel{ margin-bottom:10%; }
+.requireJob ul{padding-left:0 }
+.requireJob{ position: relative}
+.requireJob .panel{ width: 100%;}
+.requireJob li{ padding: 8px 12px;width: 100%}
+.requireJob li:hover{ background-color: rgba(111,84,153,0.5);color: #fff;}
+.requireJob .form-control{ width: 55%;position: absolute;top:55px;left: 5%;}
+.requireJob .search_{ width: 55%;position: absolute;top:88px;background-color: #fff;left:5%;min-height: 100px;border: 1px solid #ccc;z-index: 50}
+.requireJob .btn{ border-radius: 0;padding: 6px 30px;background-color: #6f5499;border: 1px solid #6f5499;position: absolute;top: 55px;left: 60%;}
+.requireJob .table{ font-size: 12px;}
+a{ cursor: pointer;}
+.consult{ margin-top: 100px;}
+
+/*---------------设备兼容---------------*/
+@media (min-width: 768px){
+  .requireJob .form-control{ top:15px; left: 30%;}
+  .requireJob .search_{top:48px;left:30%;}
+  .requireJob .btn{ top: 15px;left: 85%;}
+}
+@media (min-width: 992px){
+
+}
+@media (min-width: 1200px){
+
+}

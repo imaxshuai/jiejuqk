@@ -1,0 +1,72 @@
+<div class="container" [@flyIn]>
+  <div class="resume">
+    <app-center></app-center>
+
+    <div class="col-md-9">
+
+      <form class="form-horizontal" #userForm="ngForm" enctype="multipart/form-data" (ngSubmit)="submitUser(userForm.form.value)">
+        <input type="text" class="form-control hidden" [(ngModel)]="currentUser._id" name="userId" #userId="ngModel">
+        <div class="col-md-12">
+
+          <div class="form-group">
+            <label class="col-md-3 col-sm-3 col-xs-4 control-label">用户名<i>*</i></label>
+            <div class="col-md-6 col-sm-6 col-xs-7">
+              <input type="text" class="form-control" required pattern="[a-zA-Z0-9_.,/?!@]{2,18}" [(ngModel)]="currentUser.username" name="username" #username>
+              <div *ngIf="username.errors && (username.dirty || username.touched)"
+                   class="alert alert-warning">
+                <div [hidden]="!username.errors.required">用户名是必需的</div>
+                <div [hidden]="!username.errors.pattern">请输入2-18位用户名</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 col-sm-3 col-xs-4 control-label">密码<i>*</i></label>
+            <div class="col-md-6 col-sm-6 col-xs-7">
+              <input type="password" class="form-control" required [(ngModel)]="currentUser.password" name="password" #password="ngModel">
+              <div *ngIf="password.errors && (password.dirty || password.touched)"
+                   class="alert alert-warning">
+                <div [hidden]="!password.errors.required">密码必须的</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 col-sm-3 col-xs-4 control-label">手机<i>*</i></label>
+            <div class="col-md-6 col-sm-6 col-xs-7">
+              <input type="text" class="form-control" required pattern="[0-9]{11}" [(ngModel)]="currentUser.tel" name="tel" #tel="ngModel">
+              <div *ngIf="tel.errors && (tel.dirty || tel.touched)"
+                   class="alert alert-warning">
+                <div [hidden]="!tel.errors.required">手机号是必需的</div>
+                <div [hidden]="!tel.errors.pattern">请输入正确的手机号</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 col-sm-3 col-xs-4 control-label">邮箱<i>*</i></label>
+            <div class="col-md-6 col-sm-6 col-xs-7">
+              <input type="text" class="form-control" required pattern="\w+@\w+[.]\w+" [(ngModel)]="currentUser.email" name="email" #email="ngModel">
+              <div *ngIf="email.errors && (email.dirty || email.touched)"
+                   class="alert alert-warning">
+                <div [hidden]="!email.errors.required">邮箱是必需的</div>
+                <div [hidden]="!email.errors.pattern">请输入正确的邮箱</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class="text-right col-md-9">
+          <input type="submit" class="btn btn-info" [disabled]="!userForm.form.valid" />
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+

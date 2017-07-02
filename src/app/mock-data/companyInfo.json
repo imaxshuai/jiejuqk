@@ -1,0 +1,20 @@
+[
+  {
+    "_id":"c00001",
+    "userId":"1",
+    "companyName":"南京信息职业技术学院",
+    "createTime":"2017-05-01",
+    "address":"南京",
+    "peopleCount":"500-1000人",
+    "industry":"IT金融",
+    "nature":"国企",
+    "contacts":"许先生",
+    "homepage":"www.mm520.com",
+    "tel":"15366123031",
+    "email":"2223@qq.com",
+    "welfare":"",
+    "introduce":"你是猪吗？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？",
+    "__v":0
+  },
+  {"_id":"c00002","userId":"2","companyName":"捷居","createTime":"2017-05-24","address":"南京","peopleCount":"1000-5000人","industry":"IT","nature":"上市公司","__v":0,"contacts":"许先生","homepage":"www.mm520.com","tel":"15366123031","email":"2294368980@qq.com","welfare":"15366123031","introduce":"你是猪吗？？？？？？？？？？你是猪吗？？？？？？？？？？你是猪吗？？？？？？？？？？你是猪吗？？？？？？？？？？你是猪吗？？？？？？？？？？你是猪吗？？？？？？？？？？你是猪吗？？？？？？？？？？你是猪吗？？？？？？？？？？"}
+]

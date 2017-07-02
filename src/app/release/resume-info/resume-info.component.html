@@ -1,0 +1,170 @@
+<div class="container" [@fadeIn]>
+  <div class="resume">
+
+    <div class="col-md-offset-1 col-md-10">
+      <!--userinfo开始-->
+      <div class="row">
+        <div class="userInfo">
+
+          <div *ngIf="userInfo">
+              <img src="../assets/imgs/headerImg.jpg">
+              <div class="userInfoContent">
+                <h3>{{userInfo.username}}</h3>
+                <span>现居住{{userInfo.live}} | {{userInfo.sex}} |（{{userInfo.birthday}}）</span>
+                <span>{{userInfo.jobStatc}} | ({{userInfo.experience}})</span>
+                <div class="email"><div class="icon"></div>{{userInfo.email}}</div>
+                <div class="tel"><div class="icon"></div>{{userInfo.tel}}</div>
+              </div>
+              <div class="hiddenInfo" *ngIf="hiddenInfo">
+                <div class="container">
+                  <div class=" col-md-4">
+                    <div class="groupInfo">户口/国籍：<span>{{userInfo.nationality}}</span></div>
+                    <div class="groupInfo">婚姻&nbsp;状态：<span>{{userInfo.marriage}}</span></div>
+                    <div class="groupInfo">身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：<span>{{userInfo.height}}</span></div>
+                    <div class="groupInfo">中文&nbsp;掌握：<span>{{userInfo.chinese}}</span></div>
+                  </div>
+                  <div class=" col-md-4">
+                    <div class="groupInfo">证&nbsp;&nbsp;件&nbsp;&nbsp;号：<span>{{userInfo.certificates}}</span></div>
+                    <div class="groupInfo">政治面貌：<span>{{userInfo.level}}</span></div>
+                    <div class="groupInfo">个人&nbsp;主页：<span>{{userInfo.homepage}}</span></div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="more" (click)="more()">{{moreInfo}}</div>
+          </div>
+
+          <div *ngIf="!userInfo">
+            <h1>该用户没有填写基本资料</h1>
+          </div>
+
+        </div>
+      </div>
+      <!--userinfo结束-->
+
+      <!--thinkjob开始-->
+      <div class="row">
+        <div class="userInfo">
+
+            <div class="container">
+
+              <div class="thinkIcon">
+                <div class="icon"></div><h4>求职意向</h4>
+              </div>
+               <div class="row">
+                  <div class=" col-md-4">
+                    <div class="groupInfo">期望薪资：<span>{{thinkJob.salary}}</span></div>
+                    <div class="groupInfo">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;能：<span>{{thinkJob.work}}</span></div>
+                    <div class="groupInfo">到岗时间：<span>{{thinkJob.entryTime}}</span></div>
+                  </div>
+                  <div class=" col-md-4">
+                    <div class="groupInfo">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点：<span>{{thinkJob.workAddress}}</span></div>
+                    <div class="groupInfo">行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：<span>{{thinkJob.industry}}</span></div>
+                    <div class="groupInfo">工作类型：<span>{{thinkJob.jobType}}</span></div>
+                  </div>
+                </div>
+                <div class="row left">
+                  <div class="col-md-1">
+                    <div class="groupInfo">自我评价：</div>
+                  </div>
+                  <div class="col-md-7 col-sm-8 ">
+                    <span>{{thinkJob.aboutMe}}</span>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+      <!--thinkJob结束-->
+
+      <!--experience开始-->
+      <div class="row">
+        <div class="userInfo">
+
+            <div class="container">
+              <div class="experienceIcon">
+                <div class="icon"></div><h4>工作经验</h4>
+              </div>
+              <div *ngIf="experience">
+                <div class="row">
+                  <div class=" col-md-4">
+                    <div class="groupInfo">公&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;司：<span>{{experience.companyName}}</span></div>
+                    <div class="groupInfo">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;能：<span>{{experience.work}}</span></div>
+                    <div class="groupInfo">行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：<span>{{experience.industry}}</span></div>
+                  </div>
+                  <div class=" col-md-4">
+                    <div class="groupInfo">公司规模：<span>{{experience.peopleCount}}</span></div>
+                    <div class="groupInfo">公司性质：<span>{{experience.nature}}</span></div>
+                    <div class="groupInfo">工作时长：<span>{{experience.workAllTime}}</span></div>
+                  </div>
+                </div>
+                <div class="row left">
+                  <div class="col-md-1">
+                    <div class="groupInfo">工作描述：</div>
+                  </div>
+                  <div class="col-md-7 col-sm-8 ">
+                    <span>{{experience.workDescribe}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="!experience">
+                <div class="row">
+                  <h1>该用户没有填写工作经验信息</h1>
+                </div>
+              </div>
+
+            </div>
+
+        </div>
+      </div>
+      <!--experience结束-->
+
+      <!--education开始-->
+      <div class="row">
+        <div class="userInfo">
+
+            <div class="container">
+              <div class="experienceIcon">
+                <div class="icon"></div><h4>教育情况</h4>
+              </div>
+              <div *ngIf="education">
+                <div class="row">
+                  <div class=" col-md-4">
+                    <div class="groupInfo">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校：<span>{{education.school}}</span></div>
+                    <div class="groupInfo">学历&nbsp;/&nbsp;位：<span>{{education.degree}}</span></div>
+                  </div>
+                  <div class=" col-md-4">
+                    <div class="groupInfo">离校时间：<span>{{education.leaveSchoolTime}}</span></div>
+                    <div class="groupInfo">专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：<span>{{education.major}}</span></div>
+                  </div>
+                </div>
+                <div class="row left">
+                  <div class="col-md-1">
+                    <div class="groupInfo">在校奖励：</div>
+                  </div>
+                  <div class="col-md-7 col-sm-8 ">
+                    <span>{{education.award}}</span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!education">
+                <h1>该用户没有填写教育信息！</h1>
+              </div>
+
+
+            </div>
+
+        </div>
+      </div>
+      <!--education结束-->
+
+    </div>
+
+
+
+
+  </div>
+</div>
+
+

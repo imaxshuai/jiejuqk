@@ -1,0 +1,35 @@
+[
+  {
+    "_id": "s00001",
+    "userId": "1",
+    "salary": "4000-5000月",
+    "work": "PHP开发工程师",
+    "entryTime": "待定",
+    "workAddress": "南京",
+    "industry": "软件编程",
+    "jobType": "兼职",
+    "aboutMe": "掌握html5/css3/JavaScript/Jquery前端语言。熟练使用 angularJS Nodejs ！ 良好的自学能力。 我将用代码编译我的人生。"
+  },
+  {
+    "_id": "s00002",
+    "userId": "2",
+    "salary": "4000-50000月",
+    "work": "前端开发工程师",
+    "entryTime": "随时",
+    "workAddress": "上海",
+    "industry": "软件编程",
+    "jobType": "全职",
+    "aboutMe": "掌握html5/css3/JavaScript/Jquery前端语言。熟练使用 angularJS Nodejs ！ 良好的自学能力。 我将用代码编译我的人生。"
+  },
+  {
+    "_id": "s00003",
+    "userId": "3",
+    "salary": "40000-50000月",
+    "work": "NodeJS开发工程师",
+    "entryTime": "随时",
+    "workAddress": "北京",
+    "industry": "软件编程",
+    "jobType": "全职",
+    "aboutMe": "掌握html5/css3/JavaScript/Jquery前端语言。熟练使用 angularJS Nodejs ！ 良好的自学能力。 我将用代码编译我的人生。"
+  }
+]

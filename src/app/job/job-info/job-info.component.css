@@ -1,0 +1,65 @@
+.jobDetail {border: 1px solid #aaa;  min-height:650px;position: relative}
+.breadcrumb{  background-color: rgba(111,84,153,0);  border-radius: 0;  }
+.detailSpan{ margin-right:10%; }
+.jobDetail .panel-body h1{ color: #ff552e;font-weight: bold;float: right}
+.jobDetail .panel-body h2{ font-weight: bold;float: left}
+.jobDetail ul{ clear: both;padding-left: 0}
+.jobDetail p{ clear: both}
+.jobDetail ul li{ display: inline-block;}
+.jobDetail h4{ display: block;padding-left: 20px;border-left: 5px solid #6f5499;margin: 30px 0;font-weight: bold;color: #6a32bf}
+.jobDetail .contact{ position: absolute;right:20px;bottom:20px; }
+.jobDetail .contact div{ display: inline-block }
+.jobDetail .contact .btn{ display: inline-block;padding: 10px 50px;color:#fff;background-color: #ff552e;border: 1px solid #ff552e;font-size: 18px; font-weight: bold; }
+.jobDetail .contact .btn:hover{ border: 1px solid #ff552e;background-color: rgba(255, 85, 46,0.8)}
+.jobDetail .tel,.jobDetail .now { color: #6f5499;display: inline-block;    background: url(../imgs/mark.png) no-repeat top 0  left 0;padding-left:30px;height: 30px;margin: 10px 20px 10px 0;cursor: pointer; }
+.jobDetail .now { background: url(../imgs/mark.png) no-repeat top -49px  left 0;}
+
+/*弹出聊天框*/
+.chat{ width:80%;background-color: #eee;  margin:0 auto;border-radius: 10px;position: fixed;top: 20%;left:10%;border: 1px solid #6a32bf;z-index: 10000}
+.m1 { position:relative; }
+.m1:after,.m1:before { clear:both; content:""; display:table; height:0; margin-bottom:20px;}
+.m1 dt a{ width:60px; height:60px; display:inline-block; text-align:center; line-height:60px;border-radius: 50%; }
+.m1 dd{ max-width:274px; border:1px solid #ccc; border-radius:3px; padding:10px ;  background:#ccc; box-sizing:border-box; position:relative;}
+.m1 dd:before{ position:absolute; bottom:5px;  content:""; border-width:10px; border-style:solid; }
+.m1.he dd:before,.m1.vhe dd:before{ left:-20px; border-color:transparent #ccc  transparent transparent;   }
+.m1.me dd:before,.m1.vme dd:before{ right:-20px; border-color:transparent  transparent transparent  #ccc; }
+.m1.he dt { float:left; }
+.m1.he dd{ margin-left:20px; margin-top:20px ;float:left; }
+.m1.me dt { float:right; margin-left:20px;}
+.m1.me dd { float:right; margin-top:20px;}
+
+.m1.he dt a{ float:left; }
+.m1.he dt span{ display:block; float:left;  margin-right:-200px; color:#666; margin-left:20px;}
+
+.m1.me dt a{ float:right; }
+.m1.me dt span{ display:block; float:right;  margin-left:-200px; color:#666; margin-right:20px;}
+
+
+.m1.vhe dt a{ position:absolute; bottom:0; }
+.m1.vhe dt span{ padding-left:80px; }
+.m1.vhe dd{ margin-left:80px; margin-top:5px;}
+
+.m1.vme dt a{ position:absolute; bottom:0; right:0;}
+.m1.vme dt span{ padding-right:80px; text-align:right; display:block; }
+.m1.vme dd{ margin-right:80px; margin-top:5px; float:right;}
+
+.chat-header{ position: absolute;top: 0;left: 0;height: 35px;background-color: #6a32bf;font-weight: bold;color: #fff;width: 100%;border-radius: 10px 10px 0 0;}
+.chat-header h4{ display: block;padding-left:20px;width: 100%;}
+.char-body { overflow-Y: scroll;height: 300px;margin: 50px 0 110px 0;padding: 0 10px;}
+.chat-footer{ position: absolute;bottom: -3px;border-top:1px solid #6a32bf;width: 100%; }
+.chat-footer .chatInput{ width: 100%;height: 100px;border: none;border-radius: 0 0 10px 10px;}
+.char-header01{display: inline-block; background: url("../../../assets/imgs/chat-header01.jpg");background-size: contain}
+.char-header02{ background: url("../../../assets/imgs/chat-header02.jpg");background-size: contain}
+.chat .closeChat{ position: absolute;top: 5px;right: 10px;color: #ffffff;display: block;width: 20px;height: 20px;z-index: 1000;font-style: normal;cursor: pointer}
+
+
+/*---------------设备兼容---------------*/
+@media (min-width: 768px){
+  .chat{ width: 60%; left: 15%;}
+}
+@media (min-width: 992px){
+  .chat{ width: 45%; left: 35%;}
+}
+@media (min-width: 1200px){
+
+}

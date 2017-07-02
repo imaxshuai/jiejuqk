@@ -1,0 +1,7 @@
+/*other*/
+.other{padding: 30px 20px 0 20px;}
+.other .panel{border: 1px solid #aaa;margin-top: 20px;height:200px;overflow: hidden;}
+.other .panel-heading{color:#073c6a;margin: 0;}
+.other .panel-body p{color:#737373;text-indent: 28px;}
+.other .panel .about{margin-top: 50px;}
+.other .panel a{text-align: center;display: block;line-height: 30px;}
