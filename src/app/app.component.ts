@@ -38,6 +38,7 @@ export class AppComponent {
   ngDoCheck() {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log('6666666');
 
   }
 
