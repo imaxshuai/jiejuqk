@@ -39,7 +39,7 @@ export class AppComponent {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log('6666666');
-
+	console.log('6666666');
   }
 
   public doLogin(): void {
